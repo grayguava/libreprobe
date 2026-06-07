@@ -27,7 +27,7 @@ parser = argparse.ArgumentParser(description="Sync Cloudflare edge PoP data.")
 parser.add_argument(
     "--data",
     default="data/cloudflare-edge-locations.json",
-    help="Path to cloudflare-edge-locations.json (default: assets/data/cloudflare-edge-locations.json)",
+    help="Path to cloudflare-edge-locations.json (default: data/cloudflare-edge-locations.json)",
 )
 parser.add_argument(
     "--dry-run",
@@ -121,7 +121,7 @@ for cc, region in HARDCODED_REGION.items():
 log()
 log("[3/4] Syncing existing entries ...")
 
-updated_entries:   list[tuple] = [] 
+updated_entries:   list[tuple] = []
 unchanged_entries: list[str]   = []
 not_in_cf:         list[str]   = []
 
@@ -170,7 +170,7 @@ unknown_cca2:    list[tuple] = []
 
 for iata in sorted(cf_lookup):
     if iata in edges:
-        continue 
+        continue
 
     cf      = cf_lookup[iata]
     cca2    = cf["cca2"]

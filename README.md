@@ -1,249 +1,101 @@
-# Libreprobe — Network truth beyond speed tests
+# Libreprobe
 
-Speed tests say you're fast.  
-Libreprobe shows why you're not.
+A measurement engine for inspecting the **route to a specific endpoint** — your public IP, ASN, TLS version, the edge that served you, and the RTT profile of repeated probes.
 
-Measures real application-layer performance — not synthetic speed test bursts.
+This repository is the engine + hook contract. It contains no HTML, no CSS, no fonts, no branding. You bring your own skin.
 
-👉 Try it instantly: https://libreprobe.pages.dev  
-(No signup, no tracking, runs in your browser)
-
-![Stability](./screenshots/stability.png)
-
-Example output:
-
-❌ Very high latency with instability  
-→ Interactive apps will struggle  
-→ Likely routing or congestion issue
-
----
-
-### ⚠️ Why speed tests lie
+## What's in the box
 
 ```
-Speedtest result:
-✔ 200 Mbps
-✔ Low ping
-
-Real experience:
-✖ Lag spikes in games
-✖ Call drops
-✖ Buffering streams
-
-→ The problem is instability, not speed.
+src/
+  apps/                # Page-level apps (Info renderer, Stability runner)
+  measurement/         # Probes, samplers, scoring
+  ui/                  # Provider picker, navigation
+workers/api/
+  info/                # GET /api/info — passive introspection
+  ping/                # GET /api/ping — 204 No Content
+data/                  # Edge map, provider list
+vendor/                # Leaflet, ECharts
+docs/hooks/            # Per-page hook contracts
+examples/              # 3 minimal HTML files wired to the hooks
 ```
 
----
+## What you get
 
-## When to use
+- **Info** — a single `getConnectionInfo()` call returns your IP, ASN, edge, TLS/HTTP version, GeoIP. Wire it into a layout, you're done.
+- **Stability** — 100 RTT probes against a configurable endpoint, producing median, p90, variance, reliability, and a provider-aware verdict ("All good" / "Problems found" / etc.).
+- **Scoring** — responsiveness, consistency, reliability on a fixed scale (`excellent` → `critical`), with per-provider `baselineProfile.rttBands` overrides.
+- **Tor detection** — flagged via `client.country === "T1"`.
+- **No external runtime deps** beyond the vendored Leaflet + ECharts and the two Cloudflare Workers.
 
-- Calls lag despite good speed results
-- Gaming feels inconsistent or spiky
-- Streaming buffers randomly
-- Downloads stall or fluctuate
-- Debugging network or application performance
+## Quick start
 
----
+1. Drop the workers under your Cloudflare Pages site's `functions/api/` directory (or deploy via `wrangler` using `wrangler.toml.example`).
+2. Serve `data/*.json` and `vendor/*` from your static host.
+3. Open `examples/info.html` or `examples/stability.html` to see the engine running with the bare minimum HTML.
 
-## What Libreprobe exposes
+The examples are intentionally unstyled. They're a contract test, not a UI.
 
-### Connection breakdown (Visibility)
+## Hook contract
 
-IP, geolocation, ISP, ASN, TLS/HTTP versions, and edge PoP — from Cloudflare headers, no third-party APIs.
+See [`docs/hooks/README.md`](./docs/hooks/README.md) for the overview and per-page contracts:
 
-### Sustained speed (Throughput)
+- [`docs/hooks/home.md`](./docs/hooks/home.md) — landing page
+- [`docs/hooks/info.md`](./docs/hooks/info.md) — Info renderer
+- [`docs/hooks/stability.md`](./docs/hooks/stability.md) — Stability runner
 
-Sustained download capacity via parallel streams. Reports median post-ramp speed, p95 peak, variance, ramp time, and transfer stats.
+Each page doc lists required DOM elements, optional ones, side effects, and the data the app reads/writes. The examples implement every required ID.
 
-### Latency & Jitter (Stability)
+## Required deployments
 
-100 RTT probes at 100ms intervals. Measures median latency, jitter, p90 latency, and cold vs. warm handshake overhead. Live RTT and jitter charts with interpretation.
+The apps assume the following paths exist on the same origin (or wherever you point them):
 
-Classifies connection quality — not just reports numbers.
+| Path                                       | Purpose                              |
+|--------------------------------------------|--------------------------------------|
+| `GET /api/info`                            | JSON: client/network/protocol/edge   |
+| `GET /api/ping`                            | 204 No Content, `Cache-Control: no-store` |
+| `GET /assets/data/cloudflare-edge-locations.json` | IATA → city/country/lat/lon     |
+| `GET /assets/data/providers.json`          | Array of provider configs            |
 
----
+The defaults in the source use these paths. If you serve from a different layout, edit the source or wrap the apps in your own initialization.
+
+## Provider schema
+
+`providers.json` is an array of:
+
+```js
+{
+  id: "cf",
+  name: "Cloudflare Worker",
+  endpoint: "/api/ping",
+  recommendedIntervalMs: 100,
+  timeoutMs: 3000,
+  stability: "controlled",     // "controlled" | "public"
+  baselineProfile: {
+    description: "Cloudflare edge network",
+    expectedBehavior: "Fast, stable responses with aggressive connection reuse",
+    rttBands: {
+      excellent: 60,
+      good: 120,
+      moderate: 250
+    }
+  }
+}
+```
+
+The `baselineProfile.rttBands` overrides the default latency thresholds in `interpret.js`. Providers without a profile are scored against the global defaults.
 
 ## Architecture
 
-Based on fixed-interval RTT sampling and percentile analysis — not averages.
+Two systems, deliberately separate:
 
-Browser → CF Edge Function → CF Edge Streams → Browser metrics pipeline
+- **Info** — passive, infrastructure-assisted introspection. The browser calls `/api/info`, the Worker reads `request.cf` and headers, returns the data. The renderer draws a map and a key-value grid.
+- **Stability** — active, client-side measurement. The browser issues 100 probes (plus a cold + warm handshake) against a chosen endpoint, the Worker responds with 204, the client computes stats. The renderer draws a live chart, a distribution chart, and a verdict.
 
----
+You can use either system without the other. The Info renderer doesn't require Stability. The Stability runner only needs the `/api/info` endpoint for the Tor banner.
 
-## Who this is for
+## License
 
-If your internet "looks fast" but feels unreliable — this is for you.
+[MIT](./LICENSE)
 
-- Developers debugging performance
-- Network engineers investigating instability
-- Advanced users diagnosing ISP behaviour
-
----
-
-## Self-hosting
-
-Requires:
-
-- Cloudflare account
-- Wrangler CLI
-- One KV namespace binding
-
-Quick deploy:
-
-```bash
-git clone https://github.com/grayguava/libreprobe.git
-cd libreprobe
-
-wrangler kv namespace create LIBREPROBE_THROUGHPUT_RL
-# add binding to wrangler.toml
-
-wrangler pages deploy .
-```
-
----
-
-## Screenshots
-
-Libreprobe provides four diagnostic views:
-
-![Homepage](./screenshots/homepage.png)
-![Info page](./screenshots/infopage.png)
-![Throughput - Sustained speed test](./screenshots/throughput.png)
-![Stability - Latency & jitter analysis](./screenshots/stability.png)
-
-Example output:
-
-❌ Very high latency with instability  
-→ Interactive apps will struggle  
-→ Likely routing or congestion issue
-
----
-
-## Methodology (short)
-
-- Fixed-interval RTT avoids burst bias
-- Multi-stream tests expose congestion collapse
-- Percentile analysis beats averages
-
-For full details, metric definitions, and caveats see:
-
-[`docs/methodology/`](./docs/methodology/)
-
----
-
-## Versions
-
-- **Full** : production UI identical to hosted version
-- **Skinless** : logic-only bundle for embedding, testing, or custom frontends
-
-Both bundles deploy the same way. See the deployment docs for details.
-
----
-
-## Stack (full version)
-
-Backend runs on Cloudflare Pages Functions (Worker runtime, V8 isolates). No servers or origin compute required.
-
-- Connection data — Cloudflare request headers (`CF-Ray`, `CF-IPCountry`, etc.)  
-- Map — OpenStreetMap via CARTO, rendered with Leaflet  
-- Charts — Apache ECharts  
-- Frontend — Vanilla JS (ES modules), no framework, no build step
-
----
-## Project structure
-
-High-level layout:
-
-```
-libreprobe/
-├── index.html                             # Home — visibility overview + map
-├── info.html                              # Full connection info
-├── throughput.html                        # Throughput test
-├── stability.html                         # Stability test
-├── screenshots/                           # README screenshots
-│
-├── assets/
-│   ├── data/
-│   │   └── cloudflare-edge-locations.json # IATA PoP → city + coordinates
-│   │
-│   ├── graphics/
-│   │   ├── icon.svg
-│   │   └── Logo.png
-│   │
-│   ├── js/
-│   │   ├── apps/
-│   │   │   ├── connectionInfoRenderer.js  # Renders connection data + Leaflet map
-│   │   │   ├── getThroughput.js           # Throughput test UI and orchestration
-│   │   │   └── getStability.js            # Stability test UI and orchestration
-│   │   │
-│   │   └── measurement/
-│   │       ├── environment/
-│   │       │   └── getConnectionInfo.js   # Fetches and parses edge headers
-│   │       ├── rtt/
-│   │       │   ├── handshake.js           # Cold and warm handshake measurement
-│   │       │   ├── probe.js               # Single RTT probe
-│   │       │   └── stability.js           # 100-probe RTT measurement loop
-│   │       ├── shared/
-│   │       │   ├── interpret.js           # Stability result interpretation
-│   │       │   ├── interpretThroughput.js # Throughput result interpretation
-│   │       │   └── sampler.js             # Shared sampling utilities
-│   │       └── throughput/
-│   │           └── measureDownlink.js     # Parallel stream download measurement
-│   │
-│   └── vendor/
-│       ├── leaflet/                       # Leaflet.js + CSS
-│       └── echarts/                       # ECharts (minified)
-│
-└── functions/
-    └── api/
-        ├── info/index.js                  # Connection info endpoint
-        ├── ping/index.js                  # Latency probe endpoint
-        └── stream/                        # Throughput stream endpoint
-            ├── index.js
-            ├── globals.js
-            ├── shared.js
-            └── [token].js
-```
-
----
-
-## Deployment
-
-Libreprobe is a fully static site with Cloudflare Workers functions.  
-No frontend build step required.
-
-The `functions/api/` directory is deployed automatically by Cloudflare Pages as Workers.
-
-For full deployment instructions and self-hosting notes see:
-
-[`docs/deployment/`](./docs/deployment/)
-
----
-## Privacy
-
-Libreprobe is stateless.
-
-- No accounts  
-- No analytics  
-- No tracking  
-- No stored results  
-- No storage at edge
-- No KV persistence except tokens
-
-Connection metadata is processed in memory to generate responses and discarded immediately.
-
-Full policy: https://libreprobe.pages.dev/privacy/
-
----
-
-## Feedback
-
-Open an issue if you tried Libreprobe and tell us:
-
-- What confused you
-- What broke
-- What felt unclear
-- Whether you used the hosted or self-hosted version
-
-Be blunt. We want honest feedback.
+Third-party library licenses (Leaflet, ECharts) live at [`vendor/LICENSES.md`](./vendor/LICENSES.md).

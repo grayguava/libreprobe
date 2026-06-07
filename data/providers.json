@@ -1,0 +1,104 @@
+[
+  {
+    "id": "cf",
+    "name": "Cloudflare Worker",
+    "endpoint": "/api/ping",
+    "recommendedIntervalMs": 100,
+    "timeoutMs": 3000,
+    "stability": "controlled",
+    "baselineProfile": {
+      "description": "Cloudflare edge network",
+      "expectedBehavior": "Fast, stable responses with aggressive connection reuse",
+      "rttBands": {
+        "excellent": 60,
+        "good": 120,
+        "moderate": 250
+      }
+    }
+  },
+  {
+    "id": "jsdelivr",
+    "name": "jsDelivr",
+    "endpoint": "https://cdn.jsdelivr.net/npm/nanoid@5.1.6/package.json",
+    "recommendedIntervalMs": 100,
+    "timeoutMs": 4000,
+    "stability": "public",
+    "baselineProfile": {
+      "description": "Global CDN (NPM packages)",
+      "expectedBehavior": "Low-latency global delivery with stable routing",
+      "rttBands": {
+        "excellent": 80,
+        "good": 150,
+        "moderate": 300
+      }
+    }
+  },
+  {
+    "id": "unpkg",
+    "name": "unpkg",
+    "endpoint": "https://unpkg.com/nanoid@5.1.6/package.json",
+    "recommendedIntervalMs": 100,
+    "timeoutMs": 4000,
+    "stability": "public",
+    "baselineProfile": {
+      "description": "Global CDN (NPM packages)",
+      "expectedBehavior": "Variable routing with potentially higher backend latency",
+      "rttBands": {
+        "excellent": 100,
+        "good": 200,
+        "moderate": 400
+      }
+    }
+  },
+  {
+    "id": "cdnjs",
+    "name": "cdnjs",
+    "endpoint": "https://cdnjs.cloudflare.com/ajax/libs/nanoid/5.1.6/index.browser.min.js",
+    "recommendedIntervalMs": 100,
+    "timeoutMs": 4000,
+    "stability": "public",
+    "baselineProfile": {
+      "description": "Cloudflare-backed public CDN",
+      "expectedBehavior": "Low latency and highly stable cache delivery",
+      "rttBands": {
+        "excellent": 70,
+        "good": 140,
+        "moderate": 280
+      }
+    }
+  },
+  {
+    "id": "github_raw",
+    "name": "GitHub Raw",
+    "endpoint": "https://raw.githubusercontent.com/ai/nanoid/5.1.6/package.json",
+    "recommendedIntervalMs": 150,
+    "timeoutMs": 5000,
+    "stability": "public",
+    "baselineProfile": {
+      "description": "GitHub raw content delivery",
+      "expectedBehavior": "Stable delivery with occasional cache miss or backend fetch delay",
+      "rttBands": {
+        "excellent": 100,
+        "good": 220,
+        "moderate": 450
+      }
+    }
+  },
+  {
+    "id": "wikimedia",
+    "name": "Wikimedia",
+    "endpoint": "https://upload.wikimedia.org/wikipedia/commons/4/4c/AdGuard.svg",
+    "recommendedIntervalMs": 150,
+    "timeoutMs": 5000,
+    "stability": "public",
+    "baselineProfile": {
+      "description": "Wikimedia global media infrastructure",
+      "expectedBehavior": "Stable global delivery with moderate regional routing variance",
+      "rttBands": {
+        "excellent": 100,
+        "good": 200,
+        "moderate": 400
+      }
+    }
+  }
+]

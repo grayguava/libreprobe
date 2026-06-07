@@ -2,7 +2,7 @@ name: sync Cloudflare edge PoPs
 
 on:
   schedule:
-    - cron: "0 6 * * 0"
+    - cron: "0 6 1 * *"  # monthly cron
 
   push:
     paths:
@@ -23,20 +23,20 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.12"
 
       - name: Run sync script
-        run: python scripts/sync_cloudflare_pops.py --data assets/data/cloudflare-edge-locations.json
+        run: python scripts/sync_cloudflare_pops.py --data data/cloudflare-edge-locations.json
 
       - name: Check for changes
         id: diff
         run: |
-          git diff --quiet assets/data/cloudflare-edge-locations.json \
+          git diff --quiet data/cloudflare-edge-locations.json \
             && echo "changed=false" >> "$GITHUB_OUTPUT" \
             || echo "changed=true"  >> "$GITHUB_OUTPUT"
 
@@ -45,13 +45,13 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/data/cloudflare-edge-locations.json
+          git add data/cloudflare-edge-locations.json
           git commit -m "chore: sync Cloudflare edge PoPs [skip ci]"
           git push
 
       - name: No changes detected
         if: steps.diff.outputs.changed == 'false'
-        run: echo "assets/data/cloudflare-edge-locations.json is already up-to-date."
+        run: echo "data/cloudflare-edge-locations.json is already up-to-date."
 
       - name: Commit run log
         if: always()
