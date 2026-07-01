@@ -2878,5 +2878,13 @@
     "latitude": -41.327202,
     "longitude": 174.804993,
     "region": "Oceania"
+  },
+  "CVG": {
+    "city": "Hebron",
+    "country": "United States",
+    "countryCode": "US",
+    "latitude": 39.048801,
+    "longitude": -84.667801,
+    "region": "North America"
   }
 }
