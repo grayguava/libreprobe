@@ -1,14 +1,3 @@
-# Cloudflare
-.wrangler/
+.wrangler/*
 .dev.vars
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-Thumbs.db
-
-# OS
-desktop.ini
+functions/

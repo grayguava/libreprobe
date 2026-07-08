@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About</title>
+  <meta name="description" content="What Libreprobe is, how it works, and what it's built on.">
+
+  
+  <link rel="stylesheet" href="/assets/css/docs.entry.css">
+  
+  
+</head>
+<body>
+  
+
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <img src="/assets/graphics/icon.svg" alt="LibreProbe" class="nav-brand-icon">
+    <span class="nav-brand-text">Libreprobe</span>
+  </a>
+  <div class="nav-links">
+    <a href="/info/" class="nav-link">Info</a>
+    <a href="/stability/" class="nav-link">Stability</a>
+  </div>
+  <button class="nav-hamburger" aria-expanded="false" aria-label="Toggle menu">
+    <span class="nav-hamburger-bar"></span>
+    <span class="nav-hamburger-bar"></span>
+    <span class="nav-hamburger-bar"></span>
+  </button>
+</nav>
+
+<nav class="nav-sidebar" aria-label="Mobile navigation">
+  <div class="nav-sidebar-links">
+    <a href="/info/" class="nav-sidebar-link">Info</a>
+    <a href="/stability/" class="nav-sidebar-link">Stability</a>
+  </div>
+  <div class="nav-sidebar-divider"></div>
+  <div class="nav-sidebar-quote">
+    <p class="nav-sidebar-quote-text"></p>
+    <span class="nav-sidebar-quote-attr"></span>
+  </div>
+</nav>
+<div class="nav-sidebar-backdrop"></div>
+  
+  
+
+
+
+  <main class="about-page">
+
+
+    <header class="about-hero fade-up">
+    <h1 class="about-title">A network transparency and<br>stability measurement tool.</h1>
+    <p class="about-lead">Libreprobe surfaces what your connection reveals — and actively measures how stable and responsive your route to different providers is. Two systems: one that reads what infrastructure knows, one that measures what the browser experiences.</p>
+  </header>
+
+    
+  <section class="about-section fade-up-1">
+    <div class="about-section-label">Two systems</div>
+    <div class="about-section-body">
+      <p><strong>Info</strong> is infrastructure-assisted introspection. A Cloudflare Worker reads the metadata Cloudflare attaches to every request — your IP, geolocation, ASN, TLS details, and edge node — and surfaces it. This layer is convenient and replaceable: any platform that adds rich request headers would work the same way.</p>
+      <p><strong>Stability</strong> is active client-side measurement. A browser-based sampler sends repeated HTTP requests to a provider endpoint you choose, measures round-trip times locally, and scores the results against per-provider baseline profiles. This system is endpoint-agnostic and portable — it can probe a Worker, a CDN, a self-hosted API, or any other compatible endpoint.</p>
+    </div>
+  </section>
+
+    
+  <div class="about-features fade-up-1">
+
+    
+    <div class="about-feature">
+      <div class="about-feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="about-feature-title">Live, session-only</div>
+      <div class="about-feature-body">Every page load fetches fresh data. Nothing is cached between sessions.</div>
+    </div>
+
+    
+    <div class="about-feature">
+      <div class="about-feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="about-feature-title">Provider-path measurement</div>
+       <div class="about-feature-body">Stability is measured toward a specific provider — not your entire connection. A CDN, a Worker, or a public API can each be probed independently.</div>    </div>
+
+    
+    <div class="about-feature">
+      <div class="about-feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="about-feature-title">No storage, no accounts</div>
+       <div class="about-feature-body">Libreprobe does not maintain a database, user accounts, or persistent storage.</div>    </div>
+
+    
+    <div class="about-feature">
+      <div class="about-feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M9 9l3 3-3 3M13 15h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="about-feature-title">Open source</div>
+      <div class="about-feature-body">The full source is on GitHub. Read it, audit it, run your own instance.</div>
+    </div>
+
+    
+  </div>
+
+    
+  <section class="about-section fade-up-2">
+    <div class="about-section-label">How it works</div>
+    <div class="about-section-body">
+      <p><strong>Info</strong> uses a Cloudflare Worker to read request metadata and return it as JSON. Cloudflare enriches the request with geolocation, ASN, TLS handshake details, and the edge node identifier before the Worker runs. The Worker formats this and exits — no state is carried forward.</p>
+      <p><strong>Stability</strong> is a JavaScript measurement framework running entirely in the browser. It sends repeated HTTP requests to any compatible endpoint, measures TTFB locally, and scores results against provider-specific baselines. No measurement data is sent to Libreprobe. The architecture is designed to be portable — providers are configurable, and the scoring logic is provider-aware rather than hardcoded.</p>
+    </div>
+  </section>
+
+
+    <section class="about-section fade-up-2">
+    <div class="about-section-label">Stack</div>
+    <div class="about-section-body about-stack-body">
+
+      <div class="stack-row">
+        <div class="stack-name">Runtime</div>
+        <div class="stack-val">Cloudflare Workers (V8 isolates, no Node)</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-name">Routing data</div>
+        <div class="stack-val">Cloudflare request headers — CF-IPCountry, CF-Ray, CF-Connecting-IP, and others</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-name">Edge location map</div>
+        <div class="stack-val">Static JSON — IATA PoP codes mapped to city and coordinates</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-name">Map tiles</div>
+        <div class="stack-val">OpenStreetMap via CARTO, rendered with Leaflet</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-name">Frontend</div>
+        <div class="stack-val">Vanilla JS, no framework, no build step</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-name">Fonts</div>
+        <div class="stack-val">Mona Sans · Hubot Sans — Self-hosted</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-name">License</div>
+        <div class="stack-val">MIT</div>
+      </div>
+
+    </div>
+  </section>
+
+
+    <section class="about-section fade-up-2">
+  <div class="about-section-label">Why it exists</div>
+  <div class="about-section-body">
+    <p>
+      Network diagnostics tools are not new. Many provide useful insights into IP addresses,
+      routing, and connection metadata. Libreprobe exists to offer a minimal, transparent
+      implementation focused on two things: surfacing what your connection reveals about you, and
+      measuring how stable and responsive your route to different providers actually is — without
+      accounts, analytics scripts, ads, or monetisation mechanisms.
+    </p>
+    <p>
+      The Info page is useful because metadata enrichment is opaque by default — most users never
+      see what infrastructure operators know about their connection. Making that visible is a
+      straightforward transparency win.
+    </p>
+    <p>
+      The Stability page is more technically interesting. Active path measurement is endpoint-agnostic,
+      portable, and provider-comparative. It is not tied to any single platform. The scoring logic
+      uses per-provider baselines, so a 150 ms RTT can be "good" for one provider and "elevated" for
+      another — reflecting the reality that different routes have different characteristics. This
+      architecture can extend to self-hosted endpoints, multi-region probes, or any compatible HTTP
+      target.
+    </p>
+    <p>
+      The goal is clarity. A small, readable codebase. No hidden flows. No layered product tiers.
+      Just a straightforward diagnostic surface you can inspect and verify for yourself.
+    </p>
+    <p>
+      The name is intentional. <em>Libre</em> — free as in freedom. <em>probe</em> — a diagnostic instrument.
+    </p>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <span class="footer-copy">© 2026 Libreprobe · Powered by Cloudflare Pages</span>
+  <div class="footer-links">
+     <a href="/data-sources" class="footer-link">Data Sources</a>
+    <span class="footer-sep">·</span>
+    <a href="/privacy" class="footer-link">Privacy</a>
+    <span class="footer-sep">·</span>
+    <a href="/about" class="footer-link">About</a>
+    <a href="https://github.com/grayguava/libreprobe" target="_blank" rel="noopener" class="footer-gh" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+
+<script type="module" src="/assets/js/ui/navigation.js"></script>
+</body>
+</html>

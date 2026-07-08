@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy</title>
+  <meta name="description" content="Libreprobe privacy policy — what data is processed and your rights.">
+  
+  <link rel="stylesheet" href="/assets/css/docs.entry.css">
+
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/assets/graphics/icon.svg" alt="LibreProbe" class="nav-brand-icon">
+      <span class="nav-brand-text">Libreprobe</span>
+    </a>
+    <div class="nav-links">
+      <a href="/info/" class="nav-link">Info</a>
+      <a href="/stability/" class="nav-link">Stability</a>
+    </div>
+    <button class="nav-hamburger" aria-expanded="false" aria-label="Toggle menu">
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+      <span class="nav-hamburger-bar"></span>
+    </button>
+  </nav>
+
+  <nav class="nav-sidebar" aria-label="Mobile navigation">
+    <div class="nav-sidebar-links">
+      <a href="/info/" class="nav-sidebar-link">Info</a>
+      <a href="/stability/" class="nav-sidebar-link">Stability</a>
+    </div>
+    <div class="nav-sidebar-divider"></div>
+    <div class="nav-sidebar-quote">
+      <p class="nav-sidebar-quote-text"></p>
+      <span class="nav-sidebar-quote-attr"></span>
+    </div>
+  </nav>
+  <div class="nav-sidebar-backdrop"></div>
+
+  <main class="about-page">
+
+    <header class="about-hero">
+      <h1 class="about-title">Your data isn't kept.<br>It's displayed and discarded.</h1>
+      <div class="about-lead">
+        Stateless. Session-only. No accounts, no analytics, no advertising.
+      </div>
+    </header>
+
+    <section class="about-section">
+      <div class="about-section-label">What Libreprobe itself processes</div>
+      <div class="about-section-body">
+        <p>When your browser loads Libreprobe, a Cloudflare Worker reads the following from inbound request headers:</p>
+        <ul>
+          <li>Public IP address — from <code>CF-Connecting-IP</code></li>
+          <li>City, region, country, continent — from Cloudflare GeoIP</li>
+          <li>ISP name and ASN — from BGP routing data</li>
+          <li>TLS and HTTP protocol versions</li>
+          <li>Cloudflare edge PoP code and Ray ID</li>
+        </ul>
+        <p>These are read, formatted, and returned as JSON. Libreprobe itself does not store, log, or retain this data after the response is sent.</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-section-label">What Libreprobe itself does not do</div>
+      <div class="about-section-body">
+        <ul>
+          <li>No persistent storage of any kind</li>
+          <li>No analytics, tracking, or profiling</li>
+          <li>No advertising</li>
+          <li>No third-party data sharing for commercial purposes</li>
+        </ul>
+        <p>The Stability tool saves your selected provider preference in <code>localStorage</code>. This stays in your browser — it is never transmitted to Libreprobe's servers.</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-section-label">Stability Tool — probe requests</div>
+      <div class="about-section-body">
+        <p>The Stability page sends HTTP requests to measure responsiveness. Two cases:</p>
+        <ul>
+          <li><strong>Worker ping</strong> (<code>/api/ping</code>) — Libreprobe's own Cloudflare Worker. Processed as described above.</li>
+          <li><strong>Third-party endpoints</strong> — Cloudflare, jsDelivr, and unpkg are available as probe targets. Requests to these go directly to the provider's infrastructure and are governed by their privacy policy, not Libreprobe's.</li>
+        </ul>
+        <p>Round-trip times, sample counts, and error rates are measured in your browser and never sent to Libreprobe.</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-section-label">Infrastructure logging</div>
+      <div class="about-section-body">
+        <p>Libreprobe is stateless. Cloudflare is not.</p>
+        <p>Cloudflare Pages and Workers operate within Cloudflare's infrastructure, which retains standard access logs in accordance with its own operational and security policies. These are outside Libreprobe's control and governed by <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's Privacy Policy</a>.</p>
+        <p>Cloudflare may set a short-lived security cookie (<code>__cf_bm</code>) to distinguish legitimate traffic from automated abuse. It expires automatically and is not used for tracking.</p>
+      </div>
+    </section>
+
+    <section class="about-section about-section--last">
+      <div class="about-section-label">Contact</div>
+      <div class="about-section-body">
+        <p>Questions or concerns: <a href="https://github.com/grayguava/libreprobe/issues" target="_blank" rel="noopener noreferrer">open an issue on GitHub</a>.</p>
+        <p class="about-note">For users in the EEA, UK, or India: the processing described is necessary to provide the service you requested. If you believe your rights under GDPR, UK GDPR, or India's DPDPDA have been violated, you may contact your local supervisory authority.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="footer-copy">© 2026 Libreprobe · Powered by Cloudflare Pages</span>
+    <div class="footer-links">
+       <a href="/data-sources" class="footer-link">Data Sources</a>
+      <span class="footer-sep">·</span>
+      <a href="/privacy" class="footer-link">Privacy</a>
+      <span class="footer-sep">·</span>
+      <a href="/about" class="footer-link">About</a>
+      <a href="https://github.com/grayguava/libreprobe" target="_blank" rel="noopener" class="footer-gh" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/ui/navigation.js"></script>
+ 
+</body>
+</html>

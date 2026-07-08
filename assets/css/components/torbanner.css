@@ -1,0 +1,22 @@
+.tor-banner {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background: rgba(120, 80, 200, 0.06);
+  border: none;
+  border-left: 3px solid rgba(160, 110, 255, 0.7);
+  border-radius: 0 var(--r2) var(--r2) 0;
+  padding: 11px 16px;
+  font-family: var(--heading);
+  font-size: 14px;
+  color: #a98be0;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.tor-banner.visible { display: flex; }
+.tor-banner-icon {
+  color: #a98be0;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(160, 100, 255, 0.4));
+}
+.tor-banner strong.tor { color: #c4a8f0; font-weight: 600; }
