@@ -1829,7 +1829,7 @@
     "countryCode": "KZ",
     "latitude": 51.022202,
     "longitude": 71.466904,
-    "region": "Europe"
+    "region": "Asia Pacific"
   },
   "LLK": {
     "city": "Lankaran",
@@ -2886,5 +2886,21 @@
     "latitude": -41.327202,
     "longitude": 174.804993,
     "region": "Oceania"
+  },
+  "BDQ": {
+    "city": "Vadodara",
+    "country": "India",
+    "countryCode": "IN",
+    "latitude": 22.336201,
+    "longitude": 73.226303,
+    "region": "Asia Pacific"
+  },
+  "DLA": {
+    "city": "Douala",
+    "country": "",
+    "countryCode": "CM",
+    "latitude": 4.00608,
+    "longitude": 9.71948,
+    "region": "Africa"
   }
 }
