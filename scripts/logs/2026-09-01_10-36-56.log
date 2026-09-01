@@ -1,0 +1,108 @@
+======================================================================
+  sync-cloudflare-pops.py — 2026-09-01 10:36:56 UTC
+  Source : https://speed.cloudflare.com/locations
+======================================================================
+
+[1/4] Fetching Cloudflare PoP list ...
+       310 PoPs received from Cloudflare.
+
+[2/4] Reading your dataset ...
+       363 entries loaded from assets/data/cloudflare-edge-locations.json.
+
+[3/4] Syncing existing entries ...
+       Updated  : 0
+       Unchanged: 307
+       Not in CF: 56 (left untouched)
+
+[4/4] Adding new PoPs from Cloudflare list ...
+       Added: 3 new PoPs
+
+  Written: assets/data/cloudflare-edge-locations.json  (366 total entries)
+
+======================================================================
+  SUMMARY
+======================================================================
+  Coords/city synced : 0
+  Unchanged          : 307
+  Not in CF list     : 56
+  New PoPs added     : 3
+  Regions filled     : 0
+  Total entries now  : 366
+======================================================================
+
+----------------------------------------------------------------------
+  NEW PoPs ADDED
+----------------------------------------------------------------------
+  AIP   , India (IN)
+        lat=31.4338, lon=75.758797  [Asia Pacific]
+  DYU   Dushanbe, *** unknown — fill manually *** (TJ)
+        lat=38.543301, lon=68.824997  [Asia Pacific]
+  UDR   Udaipur, India (IN)
+        lat=24.617701, lon=73.896103  [Asia Pacific]
+
+----------------------------------------------------------------------
+  NOT IN CF LIST (left untouched)
+----------------------------------------------------------------------
+  BER  Berlin, Germany
+  BHY  Beihai, China
+  BLA  Barcelona, Venezuela
+  BNU  Blumenau, Brazil
+  CAN  Guangzhou, China
+  CCJ  Kozhikode, India
+  CCP  Concepcion, Chile
+  CGD  Changde, China
+  CGO  Zhengzhou, China
+  CKG  Chongqing, China
+  CSX  Changsha, China
+  CZX  Changzhou, China
+  DLC  Dalian, China
+  DMK  Bangkok, Thailand
+  DSS  Dakar, Senegal
+  ECN  Nicosia, Cyprus
+  EDI  Edinburgh, United Kingdom
+  FOC  Fuzhou, China
+  FUO  Foshan, China
+  HAK  Haikou, China
+  HGH  Hangzhou, China
+  HYN  Taizhou, China
+  IEV  Kyiv, Ukraine
+  IQN  Qingyang, China
+  JRS  Jerusalem, Israel
+  KHN  Nanchang, China
+  KIV  Chisinau, Moldova
+  KMG  Kunming, China
+  KWE  Guiyang, China
+  LTN  London, United Kingdom
+  MDW  Chicago, United States
+  MFE  McAllen, United States
+  NAY  Beijing, China
+  NLU  Mexico City, Mexico
+  NNG  Nanning, China
+  ORK  Cork, Ireland
+  PEK  Beijing, China
+  PVG  Shanghai, China
+  RKV  Reykjavik, Iceland
+  SAW  Istanbul, Turkey
+  SJW  Shijiazhuang, China
+  SZX  Shenzhen, China
+  TAO  Qingdao, China
+  TEN  Tongren, China
+  TFU  Chengdu, China
+  TNA  Jinan, China
+  TSA  Taipei, Taiwan, Province of China
+  TYN  Taiyuan, China
+  UBN  Ulaanbaatar, Mongolia
+  VAP  Valparaiso, Chile
+  VIT  Vitoria, Spain
+  XFN  Xiangyang, China
+  XNN  Xining, China
+  YIA  Yogyakarta, Indonesia
+  YOW  Ottawa, Canada
+  ZIA  Moscow, Russia
+
+----------------------------------------------------------------------
+  UNKNOWN COUNTRY CODES — add to EXTRA_COUNTRIES in script
+----------------------------------------------------------------------
+  DYU  cca2=TJ  city=Dushanbe
+
+  Log written: /home/runner/work/libreprobe/libreprobe/scripts/logs/2026-09-01_10-36-56.log
