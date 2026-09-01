@@ -2902,5 +2902,29 @@
     "latitude": 4.00608,
     "longitude": 9.71948,
     "region": "Africa"
+  },
+  "AIP": {
+    "city": "",
+    "country": "India",
+    "countryCode": "IN",
+    "latitude": 31.4338,
+    "longitude": 75.758797,
+    "region": "Asia Pacific"
+  },
+  "DYU": {
+    "city": "Dushanbe",
+    "country": "",
+    "countryCode": "TJ",
+    "latitude": 38.543301,
+    "longitude": 68.824997,
+    "region": "Asia Pacific"
+  },
+  "UDR": {
+    "city": "Udaipur",
+    "country": "India",
+    "countryCode": "IN",
+    "latitude": 24.617701,
+    "longitude": 73.896103,
+    "region": "Asia Pacific"
   }
 }
