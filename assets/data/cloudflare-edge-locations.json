@@ -2216,7 +2216,7 @@
     "region": "Asia Pacific"
   },
   "CRK": {
-    "city": "Angeles City",
+    "city": "Mabalacat",
     "country": "Philippines",
     "countryCode": "PH",
     "latitude": 15.186,
@@ -2925,6 +2925,14 @@
     "countryCode": "IN",
     "latitude": 24.617701,
     "longitude": 73.896103,
+    "region": "Asia Pacific"
+  },
+  "LUH": {
+    "city": "",
+    "country": "India",
+    "countryCode": "IN",
+    "latitude": 30.8547,
+    "longitude": 75.952599,
     "region": "Asia Pacific"
   }
 }
