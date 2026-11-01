@@ -1,0 +1,102 @@
+======================================================================
+  sync-cloudflare-pops.py — 2026-11-01 12:08:28 UTC
+  Source : https://speed.cloudflare.com/locations
+======================================================================
+
+[1/4] Fetching Cloudflare PoP list ...
+       309 PoPs received from Cloudflare.
+
+[2/4] Reading your dataset ...
+       367 entries loaded from assets/data/cloudflare-edge-locations.json.
+
+[3/4] Syncing existing entries ...
+       Updated  : 0
+       Unchanged: 308
+       Not in CF: 59 (left untouched)
+
+[4/4] Adding new PoPs from Cloudflare list ...
+       Added: 1 new PoPs
+
+  Written: assets/data/cloudflare-edge-locations.json  (368 total entries)
+
+======================================================================
+  SUMMARY
+======================================================================
+  Coords/city synced : 0
+  Unchanged          : 308
+  Not in CF list     : 59
+  New PoPs added     : 1
+  Regions filled     : 0
+  Total entries now  : 368
+======================================================================
+
+----------------------------------------------------------------------
+  NEW PoPs ADDED
+----------------------------------------------------------------------
+  JAI   Jaipur, India (IN)
+        lat=26.8242, lon=75.812202  [Asia Pacific]
+
+----------------------------------------------------------------------
+  NOT IN CF LIST (left untouched)
+----------------------------------------------------------------------
+  BER  Berlin, Germany
+  BHY  Beihai, China
+  BLA  Barcelona, Venezuela
+  BNU  Blumenau, Brazil
+  BUF  Buffalo, United States
+  CAN  Guangzhou, China
+  CCJ  Kozhikode, India
+  CCP  Concepcion, Chile
+  CGD  Changde, China
+  CGO  Zhengzhou, China
+  CKG  Chongqing, China
+  CSX  Changsha, China
+  CZX  Changzhou, China
+  DLC  Dalian, China
+  DMK  Bangkok, Thailand
+  DSS  Dakar, Senegal
+  ECN  Nicosia, Cyprus
+  EDI  Edinburgh, United Kingdom
+  FIH  Kinshasa, Congo
+  FOC  Fuzhou, China
+  FUO  Foshan, China
+  HAK  Haikou, China
+  HGH  Hangzhou, China
+  HYN  Taizhou, China
+  IEV  Kyiv, Ukraine
+  IQN  Qingyang, China
+  JRS  Jerusalem, Israel
+  KHN  Nanchang, China
+  KIV  Chisinau, Moldova
+  KJA  Krasnoyarsk, Russia
+  KMG  Kunming, China
+  KWE  Guiyang, China
+  LTN  London, United Kingdom
+  MDW  Chicago, United States
+  MFE  McAllen, United States
+  NAY  Beijing, China
+  NLU  Mexico City, Mexico
+  NNG  Nanning, China
+  ORK  Cork, Ireland
+  PEK  Beijing, China
+  PVG  Shanghai, China
+  RKV  Reykjavik, Iceland
+  SAW  Istanbul, Turkey
+  SJW  Shijiazhuang, China
+  SZX  Shenzhen, China
+  TAO  Qingdao, China
+  TEN  Tongren, China
+  TFU  Chengdu, China
+  TNA  Jinan, China
+  TSA  Taipei, Taiwan, Province of China
+  TYN  Taiyuan, China
+  UBN  Ulaanbaatar, Mongolia
+  VAP  Valparaiso, Chile
+  VIT  Vitoria, Spain
+  XFN  Xiangyang, China
+  XNN  Xining, China
+  YIA  Yogyakarta, Indonesia
+  YOW  Ottawa, Canada
+  ZIA  Moscow, Russia
+
+  Log written: /home/runner/work/libreprobe/libreprobe/scripts/logs/2026-11-01_12-08-28.log
