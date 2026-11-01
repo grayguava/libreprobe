@@ -2934,5 +2934,13 @@
     "latitude": 30.8547,
     "longitude": 75.952599,
     "region": "Asia Pacific"
+  },
+  "JAI": {
+    "city": "Jaipur",
+    "country": "India",
+    "countryCode": "IN",
+    "latitude": 26.8242,
+    "longitude": 75.812202,
+    "region": "Asia Pacific"
   }
 }
